@@ -1,0 +1,17 @@
+{
+  "name": "codehacking",
+  "description": "",
+  "main": "",
+  "authors": [
+    "SalehBUD <saleh.7734@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
