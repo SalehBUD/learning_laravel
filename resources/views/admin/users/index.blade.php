@@ -10,6 +10,10 @@
 @section('content')
 
 
+    <h2>Users</h2>
+
+    <a href="/admin/users/create">New User</a>
+
     <table class="table">
 
         <thead>
@@ -30,8 +34,9 @@
 
                 @foreach($users as $user)
                 <tr>
+                    <td><img src="{{$user->photo->file}}" alt="" style="width: 100px;"></td>
                     <td>{{$user->id}}</td>
-                    <td>{{$user->name}}</td>
+                    <td><a href="/admin/users/{{$user->id}}/edit">{{$user->name}}</a></td>
                     <td>{{$user->email}}</td>
                     <td>{{$user->role->name}}</td>
                     <td>{{ $user->is_active == 1 ? 'Active' : 'Deactive' }}</td>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserEditRequest;
 use App\User;
 use App\Photo;
 use Illuminate\Http\Request;
@@ -77,8 +78,10 @@ class AdminUsersController extends Controller
     public function edit($id)
     {
         //
-        return view('admin.users.edit');
+        $user = User::findOrFail($id);
+        return view('admin.users.edituser', compact('user'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -87,9 +90,29 @@ class AdminUsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserEditRequest $request, $id)
     {
         //
+
+        $user = User::findOrFail($id);
+
+        $input = $request->all();
+
+
+        if ($file = $request->file('photo_id')) {
+
+            $name = time() . $file->getClientOriginalName();
+            $file->move('images', $name);
+
+            $photo = Photo::create(['file'=>$name]);
+            $input['photo_id'] = $photo->id;
+
+        }
+
+        $user->update($input);
+
+        return redirect('/admin/users');
+
     }
 
     /**

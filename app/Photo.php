@@ -8,9 +8,16 @@ class Photo extends Model
 {
     //
 
+    protected $dir = '/images';
+
     protected $fillable = [
         'file'
     ];
+
+    public function getFileAttribute($photo)
+    {
+        return $this->dir . '/' . $photo;
+    }
 
 
 }
